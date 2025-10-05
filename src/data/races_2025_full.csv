@@ -1,0 +1,25 @@
+id,name,region,lat,lon
+0,Australian GP,AsiaPacific,-37.8497,144.968
+1,Chinese GP,AsiaPacific,31.3389,121.2197
+2,Japanese GP,AsiaPacific,34.8431,136.5411
+3,Bahrain GP,MiddleEast,26.0325,50.5106
+4,Saudi Arabian GP,MiddleEast,21.6319,39.1044
+5,Miami GP,Americas,25.958,-80.2389
+6,Emilia Romagna GP,Europe,44.3439,11.7167
+7,Monaco GP,Europe,43.7347,7.4206
+8,Spanish GP,Europe,41.57,2.2611
+9,Canadian GP,Americas,45.5064,-73.5262
+10,Austrian GP,Europe,47.2197,14.7647
+11,British GP,Europe,52.0786,-1.0169
+12,Belgian GP,Europe,50.4372,5.9714
+13,Hungarian GP,Europe,47.5789,19.2486
+14,Dutch GP,Europe,52.3881,4.5409
+15,Italian GP,Europe,45.6156,9.2811
+16,Azerbaijan GP,MiddleEast,40.3725,49.8533
+17,Singapore GP,AsiaPacific,1.2914,103.8644
+18,United States GP (Austin),Americas,30.1328,-97.6411
+19,Mexico City GP,Americas,19.4042,-99.0907
+20,Sao Paulo GP,Americas,-23.701,-46.6997
+21,Las Vegas GP,Americas,36.1147,-115.1728
+22,Qatar GP,MiddleEast,25.4889,51.4531
+23,Abu Dhabi GP,MiddleEast,24.4672,54.6031
