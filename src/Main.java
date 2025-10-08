@@ -7,9 +7,62 @@ import java.util.Objects;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        F1data data = new F1data();
+        F1data data = new F1data(
+                "src/data/races_2025_small.csv",
+                "src/data/revenue_2025_small.csv",
+                "src/data/forbids_2025_small.csv"
+        );
 
         long[] seeds = {11L, 42L, 77L, 101L, 2025L};
+
+        // ------------------ TEST CASE small ------------------
+        {
+            System.out.println("=== SA small TEST: T0=20, alpha=0.999, iters/T=1500 ===");
+            double bestScore = 0;
+            double bestMs = 0;
+            Schedule best = null;
+
+            for (int i = 0; i < 5; i++) {
+                SA sa = new SA(data);
+                sa.initialTemp = 20.0;
+                sa.alpha = 0.999;
+                sa.innerIters = 1500;
+                sa.seed = seeds[i];
+
+                long t0 = System.nanoTime();
+                Schedule s = sa.run();
+                long t1 = System.nanoTime();
+
+                double score = s.score();
+                double ms = (t1 - t0) / 1e6;
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMs = ms;
+                    best = s;
+                }
+
+                System.out.printf("Test case small, Run %s : score=%.2f  time=%.1f ms%n%n", i + 1, bestScore, ms);
+            }
+            System.out.printf("BEST (TestSmall): score=%.2f  time=%.1f ms%n%n", bestScore, bestMs);
+
+            System.out.println("Best score schedule:");
+
+            System.out.println("Week   Race");
+            System.out.println("----   ----------------------------");
+            for (int w = 0; w < Objects.requireNonNull(best).weekToRace.length; w++) {
+                int raceId = best.weekToRace[w];
+                String raceName = best.data.races[raceId].name;
+                System.out.printf("%3d    %s%n", w + 1, raceName);
+            }
+            System.out.println();
+        }
+
+        data = new F1data(
+                "src/data/races_2025_full.csv",
+                "src/data/revenue_2025_full.csv",
+                "src/data/forbids_2025_full.csv"
+        );
 
         // ------------------ TEST CASE 1 ------------------
         {

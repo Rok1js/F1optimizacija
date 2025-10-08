@@ -10,13 +10,14 @@ public class F1data {
     public final boolean[][] forbid;
     public final double lambda;
 
-    public F1data() throws Exception {
+    public F1data(String raceData, String raceRevenue, String raceForbids) throws Exception {
         // Ielasam posmu datus
-        List<String[]> racesList = CsvReader.read("src/data/races_2025_full.csv");
-        int raceLength = racesList.size();
-        races = new Race[raceLength - 1];
+        List<String[]> racesList = CsvReader.read(raceData);
+        int raceLength = racesList.size() - 1;
 
-        for (int i = 1; i < raceLength; i++) {
+        races = new Race[raceLength];
+
+        for (int i = 1; i < raceLength + 1; i++) {
             String[] values = racesList.get(i);
             races[i - 1] = new Race(
                     Integer.parseInt(values[0]),
@@ -30,7 +31,7 @@ public class F1data {
         this.totalWeeks = raceLength;
 
         // Ielasam katra posma ieņēmumus
-        List<String[]> revenueData = CsvReader.read("src/data/revenue_2025_full.csv");
+        List<String[]> revenueData = CsvReader.read(raceRevenue);
         revenue = new double[totalWeeks][totalWeeks];
         for (int i = 1; i < revenueData.size() ; i++) {
             String[] values = revenueData.get(i);
@@ -42,9 +43,9 @@ public class F1data {
         }
 
         // Ielasam datus, kad katrs posms ir kategoriski aizliegts
-        List<String[]> forbitsData = CsvReader.read("src/data/forbids_2025_full.csv");
+        List<String[]> forbitsData = CsvReader.read(raceForbids);
         forbid = new boolean[totalWeeks][totalWeeks];
-        for (int i = 1; i < forbitsData.size() ; i++) {
+        for (int i = 1; i < forbitsData.size(); i++) {
             String[] values = forbitsData.get(i);
             int raceId = Integer.parseInt(values[0]);
             int raceWeek = Integer.parseInt(values[1]);
